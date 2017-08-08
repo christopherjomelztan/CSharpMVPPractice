@@ -15,7 +15,6 @@ namespace CSharpMVPPractice.Class
         public PersonPresenter(IPersonView personView)
         {
             _personView = personView;
-
             _personView.SelectedPersonChanged += _personView_SelectedPersonChanged;
         }
 
