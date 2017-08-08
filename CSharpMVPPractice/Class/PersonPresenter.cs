@@ -12,19 +12,18 @@ namespace CSharpMVPPractice.Class
         IPersonModel _personModel;
         IPersonView _personView;
 
-        public PersonPresenter(IPersonModel personModel, IPersonView personView)
+        public PersonPresenter(IPersonView personView)
         {
-            _personModel = personModel;
             _personView = personView;
 
-            _personView.ID = _personModel.ID;
-            _personView.Name = _personModel.Name;
+            _personView.SelectedPersonChanged += _personView_SelectedPersonChanged;
         }
 
-        public void UpdateModel()
+        private void _personView_SelectedPersonChanged(object sender, Events.SelectedPersonChangedArgs e)
         {
-            _personModel.ID = _personView.ID;
-            _personModel.Name = _personView.Name;
+            _personModel = e.Person;
+            _personView.ID = _personModel.ID;
+            _personView.MyName = _personModel.Name;
         }
     }
 }
