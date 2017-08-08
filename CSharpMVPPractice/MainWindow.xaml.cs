@@ -26,10 +26,17 @@ namespace CSharpMVPPractice
             InitializeComponent();
 
             PersonModel personModel = new PersonModel() { ID = 1, Name = "Name1" };
+            PersonPresenter personPresenter = new PersonPresenter(personModel, new PersonView(this));
+            PrepareListView();
+
+        }
+
+        private void PrepareListView()
+        {
             List<PersonModel> personList = new List<PersonModel>();
-            personList.Add(personModel);
+            personList.Add(new PersonModel() { ID = 1, Name = "Name1" });
             personList.Add(new PersonModel() { ID = 2, Name = "Name2" });
-            personList.Add(new PersonModel() { ID = 2, Name = "Name3" });
+            personList.Add(new PersonModel() { ID = 3, Name = "Name3" });
 
             var gridView = new GridView();
             this.lvwPerson.View = gridView;
@@ -47,8 +54,6 @@ namespace CSharpMVPPractice
             {
                 this.lvwPerson.Items.Add(person);
             }
-            PersonPresenter personPresenter = new PersonPresenter(personModel, new PersonView(this));
-            
         }
 
         public string TxtID
@@ -66,6 +71,7 @@ namespace CSharpMVPPractice
         {
             PersonModel person;
             person = (PersonModel)lvwPerson.SelectedItem;
+            PersonPresenter personPresenter = new PersonPresenter(person, new PersonView(this));
         }
     }
 }
