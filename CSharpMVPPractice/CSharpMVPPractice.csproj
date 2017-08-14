@@ -68,6 +68,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Class\CSVPersonModelGroup.cs" />
     <Compile Include="Class\MySqlDbConnection.cs" />
     <Compile Include="Class\PersonModel.cs" />
     <Compile Include="Class\PersonModelGroup.cs" />
