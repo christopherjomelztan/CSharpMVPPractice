@@ -10,6 +10,5 @@ namespace CSharpMVPPractice.Interface
     public interface IPersonModelGroup
     {
         List<PersonModel> PersonModelGroupData(Interface.IDbConnection _dbConnection);
-        List<PersonModel> PersonModelGroupData();
     }
 }

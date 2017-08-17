@@ -73,6 +73,7 @@
     <Compile Include="Class\PersonModel.cs" />
     <Compile Include="Class\PersonModelGroup.cs" />
     <Compile Include="Class\PersonPresenter.cs" />
+    <Compile Include="Class\ReflectionUtility.cs" />
     <Compile Include="Class\SamplePersonModelGroup.cs" />
     <Compile Include="Class\SqlDbConnection.cs" />
     <Compile Include="Events\SelectedPersonChangedArgs.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Interface\IPersonModel.cs" />
     <Compile Include="Interface\IPersonModelGroup.cs" />
     <Compile Include="Interface\IPersonView.cs" />
+    <Compile Include="Interface\IReflectionUtility.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

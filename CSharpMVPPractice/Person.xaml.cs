@@ -4,6 +4,7 @@ using CSharpMVPPractice.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -14,12 +15,15 @@ namespace CSharpMVPPractice
     /// </summary>
     public partial class Person : UserControl, IPersonView
     {
-        IPersonModelGroup pg = new PersonModelGroup();
+        IReflectionUtility refutil = new ReflectionUtility();
+        IPersonModelGroup pg = new CSVPersonModelGroup();
+        Type iPersonModelGroup = typeof(IPersonModelGroup);
         public Person()
         {
             InitializeComponent();
+            PrepareCboConnectionType();
             LvwPersonBinding();
-            PrepareListView(pg.PersonModelGroupData(new MySqlDbConnection()));
+            PrepareListView(pg.PersonModelGroupData(null));
         }
 
         public int ID
@@ -48,6 +52,18 @@ namespace CSharpMVPPractice
         }
 
         public event EventHandler<SelectedPersonChangedArgs> SelectedPersonChanged;
+
+        private void PrepareCboConnectionType()
+        {
+            cboConnectionType.Items.Add("None");
+            foreach (IPersonModelGroup instance in refutil.GetImplementations(iPersonModelGroup))
+            {
+                if (!cboConnectionType.Items.Cast<string>().Contains(instance.GetType().Name))
+                {
+                    cboConnectionType.Items.Add(instance.GetType().Name);
+                }
+            }
+        }
 
         private void LvwPersonBinding()
         {

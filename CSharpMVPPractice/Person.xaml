@@ -14,12 +14,16 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left">ID</Label>
-        <TextBox x:Name="txtID" Grid.Column="1" Grid.Row="0"></TextBox>
-        <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left">Name</Label>
-        <TextBox x:Name="txtName" Grid.Column="1" Grid.Row="1"></TextBox>
-        <ListView x:Name="lvwPerson" Grid.Column="1" Grid.Row="2" SelectionChanged="lvwPerson_SelectionChanged" SelectionMode="Single"></ListView>
+        <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left">Type</Label>
+        <ComboBox Grid.Column="1" Grid.Row="0" x:Name="cboConnectionType"/>
+        <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left">ID</Label>
+        <TextBox x:Name="txtID" Grid.Column="1" Grid.Row="1"></TextBox>
+        <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left">Name</Label>
+        <TextBox x:Name="txtName" Grid.Column="1" Grid.Row="2"></TextBox>
+        <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left">List</Label>
+        <ListView x:Name="lvwPerson" Grid.Column="1" Grid.Row="3" SelectionChanged="lvwPerson_SelectionChanged" SelectionMode="Single"></ListView>
     </Grid>
 </UserControl>

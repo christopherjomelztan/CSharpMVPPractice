@@ -9,7 +9,7 @@ namespace CSharpMVPPractice.Class
 {
     public class SamplePersonModelGroup : IPersonModelGroup
     {
-        public List<PersonModel> PersonModelGroupData()
+        public List<PersonModel> PersonModelGroupData(IDbConnection _dbConnection)
         {
             List<PersonModel> personList = new List<PersonModel>();
             personList.Add(new PersonModel() { ID = 1, Name = "Name1" });
@@ -19,11 +19,6 @@ namespace CSharpMVPPractice.Class
             personList.Add(new PersonModel() { ID = 5, Name = "Name5" });
             personList.Add(new PersonModel() { ID = 6, Name = "Name6" });
             return personList;
-        }
-
-        public List<PersonModel> PersonModelGroupData(IDbConnection _dbConnection)
-        {
-            throw new NotImplementedException();
         }
     }
 }

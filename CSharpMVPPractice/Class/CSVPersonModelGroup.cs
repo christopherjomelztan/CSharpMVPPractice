@@ -10,17 +10,9 @@ namespace CSharpMVPPractice.Class
 {
     public class CSVPersonModelGroup : IPersonModelGroup
     {
-        public List<PersonModel> PersonModelGroupData()
-        {
-            List<PersonModel> values = File.ReadAllLines(Environment.CurrentDirectory + "\\CSVPerson.csv")
-                                           .Select(x => this.FromCsv(x))
-                                           .ToList();
-            return values;
-        }
-
         private PersonModel FromCsv(string csvLine)
         {
-            string[] values = csvLine.Split('.');
+            string[] values = csvLine.Split(',');
             PersonModel pg = new PersonModel();
             pg.ID = int.Parse(values[0]);
             pg.Name = values[1];
@@ -29,7 +21,10 @@ namespace CSharpMVPPractice.Class
 
         public List<PersonModel> PersonModelGroupData(IDbConnection _dbConnection)
         {
-            throw new NotImplementedException();
+            List<PersonModel> values = File.ReadAllLines(Environment.CurrentDirectory + "\\CSVPerson.csv")
+                                        .Select(x => this.FromCsv(x))
+                                        .ToList();
+            return values;
         }
     }
 }

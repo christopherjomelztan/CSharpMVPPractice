@@ -6,14 +6,9 @@ using System;
 
 namespace CSharpMVPPractice.Class
 {
-    public class PersonModelGroup : IPersonModelGroup
+    public class DatabasePersonModelGroup : IPersonModelGroup
     {
         private Interface.IDbConnection _dbConnection;
-
-        public List<PersonModel> PersonModelGroupData()
-        {
-            throw new NotImplementedException();
-        }
 
         public List<PersonModel> PersonModelGroupData(Interface.IDbConnection dbConnection)
         {
