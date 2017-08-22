@@ -12,6 +12,8 @@ namespace CSharpMVPPractice.Class
 
         public List<PersonModel> PersonModelGroupData(Interface.IDbConnection dbConnection)
         {
+            if (dbConnection == null)
+                return new List<PersonModel>();
             _dbConnection = dbConnection;
             DataSet ds = dbConnection.SqlDatasetQuery("Select * from Person");
             return ds.Tables[0].AsEnumerable().Select(x => new PersonModel { ID = x.Field<int>("ID"), Name = x.Field<string>("PersonName") }).ToList();

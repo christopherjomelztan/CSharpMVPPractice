@@ -69,9 +69,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Class\CSVPersonModelGroup.cs" />
+    <Compile Include="Class\DbConnectionFactory.cs" />
     <Compile Include="Class\MySqlDbConnection.cs" />
     <Compile Include="Class\PersonModel.cs" />
     <Compile Include="Class\PersonModelGroup.cs" />
+    <Compile Include="Class\PersonModelGroupFactory.cs" />
     <Compile Include="Class\PersonPresenter.cs" />
     <Compile Include="Class\ReflectionUtility.cs" />
     <Compile Include="Class\SamplePersonModelGroup.cs" />

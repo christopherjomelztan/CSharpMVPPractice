@@ -16,14 +16,18 @@ namespace CSharpMVPPractice
     public partial class Person : UserControl, IPersonView
     {
         IReflectionUtility refutil = new ReflectionUtility();
-        IPersonModelGroup pg = new CSVPersonModelGroup();
+        PersonModelGroupFactory pf = new PersonModelGroupFactory();
+        DbConnectionFactory df = new DbConnectionFactory();
+        IPersonModelGroup pg;
+        
         Type iPersonModelGroup = typeof(IPersonModelGroup);
+        Type iDbConnection = typeof(Interface.IDbConnection);
         public Person()
         {
             InitializeComponent();
             PrepareCboConnectionType();
             LvwPersonBinding();
-            PrepareListView(pg.PersonModelGroupData(null));
+            
         }
 
         public int ID
@@ -56,11 +60,19 @@ namespace CSharpMVPPractice
         private void PrepareCboConnectionType()
         {
             cboConnectionType.Items.Add("None");
+            cboDbConnection.Items.Add("None");
             foreach (IPersonModelGroup instance in refutil.GetImplementations(iPersonModelGroup))
             {
                 if (!cboConnectionType.Items.Cast<string>().Contains(instance.GetType().Name))
                 {
                     cboConnectionType.Items.Add(instance.GetType().Name);
+                }
+            }
+            foreach (Interface.IDbConnection instance in refutil.GetImplementations(iDbConnection))
+            {
+                if (!cboDbConnection.Items.Cast<string>().Contains(instance.GetType().Name))
+                {
+                    cboDbConnection.Items.Add(instance.GetType().Name);
                 }
             }
         }
@@ -83,6 +95,7 @@ namespace CSharpMVPPractice
 
         private void PrepareListView(List<PersonModel> personList)
         {
+            lvwPerson.Items.Clear();
             foreach (PersonModel person in personList)
             {
                 this.lvwPerson.Items.Add(person);
@@ -92,6 +105,17 @@ namespace CSharpMVPPractice
         private void lvwPerson_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedPersonChanged?.Invoke(this, new SelectedPersonChangedArgs { Person = (PersonModel)lvwPerson.SelectedItem });
+        }
+
+        private void cboConnectionType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            pg = pf.GetPersonModelGroup(cboConnectionType.SelectedValue.ToString());
+            PrepareListView(pg.PersonModelGroupData(null));
+        }
+
+        private void cboDbConnection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PrepareListView(pg.PersonModelGroupData(df.GetDbConnection(cboDbConnection.SelectedValue.ToString())));
         }
     }
 }
