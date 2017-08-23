@@ -9,6 +9,10 @@ namespace CSharpMVPPractice.Class
     public class DatabasePersonModelGroup : IPersonModelGroup
     {
         private Interface.IDbConnection _dbConnection;
+        public List<PersonModel> PersonModelGroupData()
+        {
+            return new List<PersonModel>();
+        }
 
         public List<PersonModel> PersonModelGroupData(Interface.IDbConnection dbConnection)
         {

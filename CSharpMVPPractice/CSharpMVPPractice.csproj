@@ -72,7 +72,7 @@
     <Compile Include="Class\DbConnectionFactory.cs" />
     <Compile Include="Class\MySqlDbConnection.cs" />
     <Compile Include="Class\PersonModel.cs" />
-    <Compile Include="Class\PersonModelGroup.cs" />
+    <Compile Include="Class\DatabasePersonModelGroup.cs" />
     <Compile Include="Class\PersonModelGroupFactory.cs" />
     <Compile Include="Class\PersonPresenter.cs" />
     <Compile Include="Class\ReflectionUtility.cs" />

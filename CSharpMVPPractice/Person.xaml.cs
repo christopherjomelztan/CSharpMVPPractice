@@ -110,7 +110,7 @@ namespace CSharpMVPPractice
         private void cboConnectionType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             pg = pf.GetPersonModelGroup(cboConnectionType.SelectedValue.ToString());
-            PrepareListView(pg.PersonModelGroupData(null));
+            PrepareListView(pg.PersonModelGroupData());
         }
 
         private void cboDbConnection_SelectionChanged(object sender, SelectionChangedEventArgs e)

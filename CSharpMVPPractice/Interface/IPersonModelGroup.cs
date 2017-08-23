@@ -9,6 +9,7 @@ namespace CSharpMVPPractice.Interface
 {
     public interface IPersonModelGroup
     {
+        List<PersonModel> PersonModelGroupData();
         List<PersonModel> PersonModelGroupData(Interface.IDbConnection _dbConnection);
     }
 }

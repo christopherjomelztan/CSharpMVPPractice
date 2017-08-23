@@ -21,6 +21,11 @@ namespace CSharpMVPPractice.Class
 
         public List<PersonModel> PersonModelGroupData(IDbConnection _dbConnection)
         {
+            return this.PersonModelGroupData();
+        }
+
+        public List<PersonModel> PersonModelGroupData()
+        {
             List<PersonModel> values = File.ReadAllLines(Environment.CurrentDirectory + "\\CSVPerson.csv")
                                         .Select(x => this.FromCsv(x))
                                         .ToList();

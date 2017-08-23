@@ -11,6 +11,11 @@ namespace CSharpMVPPractice.Class
     {
         public List<PersonModel> PersonModelGroupData(IDbConnection _dbConnection)
         {
+            return this.PersonModelGroupData();
+        }
+
+        public List<PersonModel> PersonModelGroupData()
+        {
             List<PersonModel> personList = new List<PersonModel>();
             personList.Add(new PersonModel() { ID = 1, Name = "Name1" });
             personList.Add(new PersonModel() { ID = 2, Name = "Name2" });
