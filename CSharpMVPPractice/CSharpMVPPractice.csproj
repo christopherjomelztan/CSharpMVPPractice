@@ -78,6 +78,7 @@
     <Compile Include="Class\ReflectionUtility.cs" />
     <Compile Include="Class\SamplePersonModelGroup.cs" />
     <Compile Include="Class\SqlDbConnection.cs" />
+    <Compile Include="Events\PersonModelGroupChangedArgs.cs" />
     <Compile Include="Events\SelectedPersonChangedArgs.cs" />
     <Compile Include="Interface\IDbConnection.cs" />
     <Compile Include="Interface\IPersonModel.cs" />

@@ -15,15 +15,18 @@ namespace CSharpMVPPractice
     /// </summary>
     public partial class Person : UserControl, IPersonView
     {
-        IReflectionUtility refutil = new ReflectionUtility();
-        PersonModelGroupFactory pf = new PersonModelGroupFactory();
-        DbConnectionFactory df = new DbConnectionFactory();
-        IPersonModelGroup pg;
-        
-        Type iPersonModelGroup = typeof(IPersonModelGroup);
-        Type iDbConnection = typeof(Interface.IDbConnection);
+        private IReflectionUtility _refutil;
+        private PersonModelGroupFactory _pf;
+        private DbConnectionFactory _df;
+
+        public event EventHandler<SelectedPersonChangedArgs> SelectedPersonChanged;
+        public event EventHandler<PersonModelGroupChangedArgs> PersonModelGroupChanged;
+
         public Person()
         {
+            _refutil = new ReflectionUtility();
+            _pf = new PersonModelGroupFactory();
+            _df = new DbConnectionFactory();
             InitializeComponent();
             PrepareCboConnectionType();
             LvwPersonBinding();
@@ -55,20 +58,19 @@ namespace CSharpMVPPractice
             }
         }
 
-        public event EventHandler<SelectedPersonChangedArgs> SelectedPersonChanged;
+        public List<PersonModel> PersonModelList { get; set; }
+
 
         private void PrepareCboConnectionType()
         {
-            cboConnectionType.Items.Add("None");
-            cboDbConnection.Items.Add("None");
-            foreach (IPersonModelGroup instance in refutil.GetImplementations(iPersonModelGroup))
+            foreach (IPersonModelGroup instance in _refutil.GetImplementations(typeof(IPersonModelGroup)))
             {
                 if (!cboConnectionType.Items.Cast<string>().Contains(instance.GetType().Name))
                 {
                     cboConnectionType.Items.Add(instance.GetType().Name);
                 }
             }
-            foreach (Interface.IDbConnection instance in refutil.GetImplementations(iDbConnection))
+            foreach (Interface.IDbConnection instance in _refutil.GetImplementations(typeof(Interface.IDbConnection)))
             {
                 if (!cboDbConnection.Items.Cast<string>().Contains(instance.GetType().Name))
                 {
@@ -109,13 +111,12 @@ namespace CSharpMVPPractice
 
         private void cboConnectionType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            pg = pf.GetPersonModelGroup(cboConnectionType.SelectedValue.ToString());
-            PrepareListView(pg.PersonModelGroupData());
+            PersonModelGroupChanged?.Invoke(this, new PersonModelGroupChangedArgs { PersonGroup = _pf.GetPersonModelGroup(cboConnectionType.SelectedValue.ToString()) });
+            PrepareListView(PersonModelList);
         }
 
         private void cboDbConnection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            PrepareListView(pg.PersonModelGroupData(df.GetDbConnection(cboDbConnection.SelectedValue.ToString())));
         }
     }
 }

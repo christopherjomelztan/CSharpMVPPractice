@@ -1,4 +1,5 @@
-﻿using CSharpMVPPractice.Events;
+﻿using CSharpMVPPractice.Class;
+using CSharpMVPPractice.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,9 @@ namespace CSharpMVPPractice.Interface
         int ID { get; set; }
         string MyName { get; set; }
 
+        List<PersonModel> PersonModelList { get; set; }
+
         event EventHandler<SelectedPersonChangedArgs> SelectedPersonChanged;
+        event EventHandler<PersonModelGroupChangedArgs> PersonModelGroupChanged;
     }
 }
